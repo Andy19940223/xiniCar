@@ -11,13 +11,14 @@
     <div class="setColor-title">
       <div class="title max">
         <div class="iphone">
-          GET FREE QUOTE <br>
-          <span>+61 439 556 666</span>
+          联系电话<br>
+          <span>0488028919</span>
         </div>
         <img src="../../assets/logo.png">
         <a href="javascript:;" class="zxbj">咨询报价</a>
       </div>
     </div>
+    <!-- 滚动后的导航栏 -->
     <div class="setColor-nav"  v-show="show" style="position:fixed;z-index:999;width: 100%;background:#002b2f;top: 0;">
       <div class="nav max">
         <img src="../../assets/time.png">
@@ -29,13 +30,14 @@
     <div class="setColor-title" v-show="show" style="position:fixed;z-index:999;width: 100%;background:#fff;top: 36px;border-bottom:1px solid #ccc;">
       <div class="title max">
         <div class="iphone">
-          GET FREE QUOTE <br>
-          <span>+61 439 556 666</span>
+          联系电话<br>
+          <span>0488028919</span>
         </div>
         <img src="../../assets/logo.png">
         <a href="javascript:;" class="zxbj">咨询报价</a>
       </div>
     </div>
+    <!-- 横幅 -->
     <div class="setColor-banner">
       <img src="../../assets/banner.png" ondragstart="return false;" oncontextmenu="return false;">
       <div class="banner">
@@ -44,9 +46,16 @@
           <div ref='bannBr'></div>
         </div>
         <div class="banner-cont">
-          <h1>{{bannerCont.title}}</h1>
-          <i ref="hg"></i>
-          <p v-html="bannerCont.cont"></p>
+          <!-- 添加动画效果 -->
+          <transition enter-active-class="animated fadeInUp" 
+          :duration="1000">
+            <h1 v-if="show">{{bannerCont.title}}</h1>
+          </transition>
+            <i ref="hg"></i>
+          <transition enter-active-class="animated fadeInDown" 
+          :duration="1000">
+            <p v-if="show" v-html="bannerCont.cont"></p>
+          </transition>
           <a href="javascript:;">立即预定</a>
         </div>
         <div class="banner-btn">
@@ -57,24 +66,30 @@
     </div>
     <div class="setColor-server">
       <div class="server max">
-        <div class="title">
-          <span>我们提供的服务</span>
-        </div>
-        <div class="server-item">
-          <div v-for="(item,i) in serverList" :key="i">
-            <img :src="item.url">
-            <h3>{{item.title}}</h3>
-            <p>{{item.cont}}</p>
-          </div>
-        </div>
+          <transition enter-active-class="animated fadeInUp" :duration="1000">
+            <div class="title" v-if="showTitle">
+                <span>我们提供的服务</span>
+            </div>
+          </transition>
+          <transition enter-active-class="animated fadeInUp" :duration="1000">
+            <div class="server-item" v-if="showContent">
+              <div v-for="(item,i) in serverList" :key="i">
+                <img :src="item.url">
+                <h3>{{item.title}}</h3>
+                <p>{{item.cont}}</p>
+              </div>
+            </div>
+          </transition>
       </div>
      </div>
     <div class="setColor-cn">
       <div class="cn max">
-        <div class="title">
-          <span>我们提供的服务</span>
-        </div>
-        <div>
+        <transition enter-active-class="animated fadeInUp" :duration="1000">
+            <div class="title" v-if="showCom">
+                <span>我们的承诺</span>
+            </div>
+          </transition>
+        <div class="commitment">
           <img src="../../assets/cntp1.png">
           <img src="../../assets/cntp2.png">
           <img src="../../assets/cntp3.png">
@@ -87,36 +102,39 @@
           <img src="../../assets/fw.png">
         </div>
         <div>
-          <div class="fw-box">
-            <h2>优秀的服务</h2>
-            <div class="fw-txts">
-              <div>
-                <img src="../../assets/fw-1.png">
-                <h3>友好的客户服务</h3>
-                <p>一个平易近人的团队，您可以在个人层面上了解</p>
-              </div>
-              <div>
-                <img src="../../assets/fw-2.png">
-                <h3>安全</h3>
-                <p>为员工和客户提供安全的服务</p>
-              </div>
-              <div>
-                <img src="../../assets/fw-3.png">
-                <h3>适用于紧急问题</h3>
-                <p>我们不受营业时间的限制。 我们的工作人员很乐意为紧急事项提供24小时协助（费用可能会有所不同）</p>
-              </div>
-              <div>
-                <img src="../../assets/fw-4.png">
-                <h3>支持可用</h3>
-                <p>支持和理解船员，以适应您的需求灵活</p>
+          <transition enter-active-class="animated fadeInRight" :duration="1000">
+            <div class="fw-box" v-if="showRight">
+              <h2>优秀的服务</h2>
+              <div class="fw-txts">
+                <div>
+                  <img src="../../assets/fw-1.png">
+                  <h3>友好的客户服务</h3>
+                  <p>一个平易近人的团队，您可以在个人层面上了解</p>
+                </div>
+                <div>
+                  <img src="../../assets/fw-2.png">
+                  <h3>安全</h3>
+                  <p>为员工和客户提供安全的服务</p>
+                </div>
+                <div>
+                  <img src="../../assets/fw-3.png">
+                  <h3>适用于紧急问题</h3>
+                  <p>我们不受营业时间的限制。 我们的工作人员很乐意为紧急事项提供24小时协助（费用可能会有所不同）</p>
+                </div>
+                <div>
+                  <img src="../../assets/fw-4.png">
+                  <h3>支持可用</h3>
+                  <p>支持和理解船员，以适应您的需求灵活</p>
+                </div>
               </div>
             </div>
-          </div>
+          </transition>
         </div>
       </div>
       <div class="fy">
         <div>
-          <div class="fy-box">
+          <transition enter-active-class="animated fadeInLeft">
+          <div class="fy-box" v-if="showLeft">
             <h2>额外费用</h2>
             <div>
               <div><img src="../../assets/1.png"></div>
@@ -140,53 +158,62 @@
               </div>
             </div>
           </div>
+          </transition>
         </div>
         <div>
           <img src="../../assets/fy.png">
         </div>
       </div>
      </div>
-    <div class="setColor-bj">
+    <div class="setColor-bj" >
       <img src="../../assets/banner.png" ondragstart="return false;" oncontextmenu="return false;">
-      <div class="bj">
-        <div>
-          <h2>赶快! 立即联系我们获取</h2>
-          <p>免费第一次报价</p>
-          <a href="javascript:;">预订报价</a>
+      <transition enter-active-class="animated fadeIn">
+        <div class="bj" v-if="showOffer">
+          <div >
+            <h2>赶快! 立即联系我们获取</h2>
+            <p>免费第一次报价</p>
+            <a href="javascript:;">预订报价</a>
+          </div>
         </div>
-      </div>
+      </transition>
      </div>
      <div class="setColor-toast">
       <div class="cn max">
-        <div class="title">
-          <span>有用的提示</span>
-        </div>
-        <div class="cont">
-          <div v-for="(item,i) in toastList" :key="i">
-            <img :src="item.url" alt="">
-            <div>
-              <h2>{{item.title}}</h2>
-              <i></i>
-              <h5>点击查询详情></h5>
+        <transition enter-active-class="animated fadeInUp">
+          <div class="title" v-if="showPrompt">
+            <span>有用的提示</span>
+          </div>
+        </transition>
+        <transition enter-active-class="animated fadeInUp">
+          <div class="cont" v-if="showPromptDel">
+            <div v-for="(item,i) in toastList" :key="i">
+              <img :src="item.url" alt="">
+              <div>
+                <h2>{{item.title}}</h2>
+                <i></i>
+                <h5>点击查询详情></h5>
+              </div>
             </div>
           </div>
-        </div>
+        </transition>
       </div>
      </div>
     <div class="setColor-email">
-      <div class="cn max">
-        <div class="title">
-          <span>现在预订! </span>
+      <transition enter-active-class="animated fadeInUp">
+        <div class="cn max" v-if="showReserve">
+          <div class="title">
+            <span>现在预订! </span>
+          </div>
+          <h5>HOME EASY可以让您顺畅地体验穿越城市或穿越整个州或全国各地。 您只需要一个能够快速联系到您的报价，您就可以完成交易并立即开始行动！</h5>
+          <div class="cont">
+            <input type="text" placeholder="姓名">
+            <input type="text" placeholder="电子邮箱">
+            <input type="text" placeholder="电话">
+            <textarea cols="30" rows="10"></textarea>
+            <a href="javascript:;">联系我们</a>
+          </div>
         </div>
-        <h5>HOME EASY可以让您顺畅地体验穿越城市或穿越整个州或全国各地。 您只需要一个能够快速联系到您的报价，您就可以完成交易并立即开始行动！</h5>
-        <div class="cont">
-          <input type="text" placeholder="姓名">
-          <input type="text" placeholder="电子邮箱">
-          <input type="text" placeholder="电话">
-          <textarea cols="30" rows="10"></textarea>
-          <a href="javascript:;">联系我们</a>
-        </div>
-      </div>
+      </transition>
      </div>
     <div class="foot">
       <div class="logo">
@@ -195,18 +222,18 @@
         <a href="javascript:;">预约报价</a>
       </div>
       <div class='cont'>
-        <p>联系我们</p>
-        <p>
-          地址:<br>
-          <span>1 Railway Parade Burwood</span>
-        </p>
+        <p @click="ani">联系我们</p>
+          <p>
+            地址:<br>
+            <span>1 Railway Parade Burwood</span>
+          </p>
         <p>
           联系电话:<br>
-          <span>0439 556 666</span>
+          <span>0488028919</span>
         </p>
         <p>
           电子邮箱:<br>
-          <span>info@ozhomeeasy.com.au</span>
+          <span>401861591@qq.com</span>
         </p>
       </div>
     </div>
@@ -216,11 +243,21 @@
 <script>
 import './style.scss'
 import { setTimeout } from 'timers';
+import animated from '../../../public/animate.css';
 
 export default {
   data () {
     return {
       show: false,
+      showTitle:false,
+      showContent:false,
+      showCom:false,
+      showLeft:false,
+      showRight:false,
+      showOffer:false,
+      showPrompt:false,
+      showPromptDel:false,
+      showReserve:false,
       toastList:[
         {title: '8个非常有用的提示,让您的孩子应对移动',url: require('../../assets/toast1.png')},
         {title: '如何包装菜肴和玻璃移动',url: require('../../assets/toast2.png')},
@@ -252,15 +289,41 @@ export default {
     this.bannerCont = this.bannerList[0].content
   },
   mounted () {
-    document.body.offsetWidth < 415 ? this.show = true :
+    // document.body.offsetWidth < 415 ? this.show = true :
     window.addEventListener('scroll',this.handleScroll,true)
+    this.show=true;
   },
   methods: {
+    // 滚动到指定位置，加载动画
     handleScroll(e){
-      console.log(document.documentElement.scrollTop,document.body.scrollTop)
-      document.documentElement.scrollTop > 79 ? this.show = true : this.show = false
+      console.log(document.documentElement.scrollTop)
+      document.body.offsetWidth < 415 ?(
+        // 手机版
+        document.documentElement.scrollTop>265?this.showTitle=true:this.showTitle=false,
+        document.documentElement.scrollTop>460?this.showContent=true:this.showContent=false,
+        document.documentElement.scrollTop>1829?this.showCom=true:this.showCom=false,
+        document.documentElement.scrollTop>3500?this.showRight=true:this.showRight=false,
+        document.documentElement.scrollTop>4257?this.showLeft=true:this.showLeft=false,
+        document.documentElement.scrollTop>5584?this.showOffer=true:this.showOffer=false,
+        document.documentElement.scrollTop>5884?this.showPrompt=true:this.showPrompt=false,
+        document.documentElement.scrollTop>6100?this.showPromptDel=true:this.showPromptDel=false,
+        document.documentElement.scrollTop>6910?this.showReserve=true:this.showReserve=false
+      ):(
+        // 电脑版
+        document.documentElement.scrollTop>299?this.showTitle=true:this.showTitle=false,
+        document.documentElement.scrollTop>599?this.showContent=true:this.showContent=false,
+        // 后面都是图片，会顶下去
+        document.documentElement.scrollTop>970?this.showCom=true:this.showCom=false,
+        document.documentElement.scrollTop>1700?this.showRight=true:this.showRight=false,
+        document.documentElement.scrollTop>2500?this.showLeft=true:this.showLeft=false,
+        document.documentElement.scrollTop>3200?this.showOffer=true:this.showOffer=false,
+        document.documentElement.scrollTop>3400?this.showPrompt=true:this.showPrompt=false,
+        document.documentElement.scrollTop>3600?this.showPromptDel=true:this.showPromptDel=false,
+        document.documentElement.scrollTop>4000?this.showReserve=true:this.showReserve=false
+      )
     },
     bannBBmove (v) {
+      this.show=!this.show;
       let {title,cont,id} = v
       this.bannerCont = {title,cont,id}
       this.$refs.bannBl.style.transition = '.1s'
@@ -280,7 +343,11 @@ export default {
         this.$refs.bannBr.style.left = '96%'
         this.$refs.hg.style.transition = '.5s'
         this.$refs.hg.style.width = '320px'
+        this.show=true;
       },100)
+    },
+    ani(){
+      this.show=!this.show;
     }
   },
 }
